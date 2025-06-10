@@ -2,11 +2,27 @@ package controller
 
 import (
 	resterr "crud/src/configuration/rest-err"
+	"crud/src/controller/model/request"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
 
 func CreateMembro(c *gin.Context) {
-	err := resterr.NewBadRequestError("Você chamou a rota de forma errada")
-	c.JSON(err.Code, err)
+
+	var membroRequest request.MembroRequest
+
+	if err := c.ShouldBindJSON(&membroRequest); err != nil {
+		restErr := resterr.NewBadRequestError(
+			fmt.Sprintf("There are some incorrect filds, erro=%s\n", err.Error()),
+		)
+
+		c.JSON(restErr.Code, restErr)
+		return
+	}
+
+	fmt.Println(membroRequest)
+
+	// err := resterr.NewBadRequestError("Você chamou a rota de forma errada")
+	// c.JSON(err.Code, err)
 }
