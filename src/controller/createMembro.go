@@ -10,14 +10,11 @@ import (
 	"go.uber.org/zap"
 )
 
-var (
-	MembroDomainInterface model.MembroDomainInterface
-)
-
-func CreateMembro(c *gin.Context) {
+func CreateMembroController(c *gin.Context) {
 	logger.Info("Init CreateMembro Controller",
 		zap.String("journey", "createMembro"),
 	)
+
 	var membroRequest request.MembroRequest
 
 	if err := c.ShouldBindJSON(&membroRequest); err != nil {
