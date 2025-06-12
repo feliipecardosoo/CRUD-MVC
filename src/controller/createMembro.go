@@ -21,8 +21,5 @@ func CreateMembro(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(membroRequest)
-
-	// err := resterr.NewBadRequestError("Você chamou a rota de forma errada")
-	// c.JSON(err.Code, err)
+	c.JSON(201, membroRequest)
 }
