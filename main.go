@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crud/src/configuration/logger"
 	"crud/src/controller/routes"
 	"fmt"
 	"log"
@@ -11,6 +12,7 @@ import (
 )
 
 func main() {
+	logger.Info("Começando servidor")
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
