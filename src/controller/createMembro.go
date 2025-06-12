@@ -34,7 +34,7 @@ func CreateMembroController(c *gin.Context) {
 		membroRequest.Age,
 	)
 
-	if err := domain.CreateMembro(); err != nil {
+	if err := domain.CreateMembroModel(); err != nil {
 		c.JSON(err.Code, membroRequest)
 		return
 	}

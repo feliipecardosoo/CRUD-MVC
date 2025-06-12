@@ -22,16 +22,16 @@ type MembroDomain struct {
 	Age      int8
 }
 
+type MembroDomainInterface interface {
+	CreateMembroModel() *resterr.RestErr
+	UpdateMembro(string) *resterr.RestErr
+	FindMembro(string) *resterr.RestErr
+	DeleteMembro(string) *resterr.RestErr
+}
+
 func (ud *MembroDomain) EncryptPassword() {
 	hash := md5.New()
 	defer hash.Reset()
 	hash.Write([]byte(ud.Password))
 	ud.Password = hex.EncodeToString(hash.Sum(nil))
-}
-
-type MembroDomainInterface interface {
-	CreateMembro() *resterr.RestErr
-	UpdateMembro(string) *resterr.RestErr
-	FindMembro(string) *resterr.RestErr
-	DeleteMembro(string) *resterr.RestErr
 }
