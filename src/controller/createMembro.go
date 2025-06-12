@@ -4,9 +4,14 @@ import (
 	"crud/src/configuration/logger"
 	"crud/src/configuration/validation"
 	"crud/src/controller/model/request"
+	"crud/src/model"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+)
+
+var (
+	MembroDomainInterface model.MembroDomainInterface
 )
 
 func CreateMembro(c *gin.Context) {
@@ -25,5 +30,20 @@ func CreateMembro(c *gin.Context) {
 		return
 	}
 
-	c.JSON(201, membroRequest)
+	domain := model.NewMembroDomain(
+		membroRequest.Email,
+		membroRequest.Password,
+		membroRequest.Name,
+		membroRequest.Age,
+	)
+
+	if err := domain.CreateMembro(); err != nil {
+		c.JSON(err.Code, membroRequest)
+		return
+	}
+
+	logger.Info("Membro criado com sucesso",
+		zap.String("journey", "createMembro"))
+
+	c.JSON(201, "")
 }
