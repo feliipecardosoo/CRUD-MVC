@@ -7,7 +7,7 @@ import (
 )
 
 func NewMembroDomain(email, password, name string, age int8) MembroDomainInterface {
-	return &MembroDomain{
+	return &membroDomain{
 		email,
 		password,
 		name,
@@ -15,11 +15,11 @@ func NewMembroDomain(email, password, name string, age int8) MembroDomainInterfa
 	}
 }
 
-type MembroDomain struct {
-	Email    string
-	Password string
-	Name     string
-	Age      int8
+type membroDomain struct {
+	email    string
+	password string
+	name     string
+	age      int8
 }
 
 type MembroDomainInterface interface {
@@ -29,9 +29,9 @@ type MembroDomainInterface interface {
 	DeleteMembro(string) *resterr.RestErr
 }
 
-func (ud *MembroDomain) EncryptPassword() {
+func (ud *membroDomain) EncryptPassword() {
 	hash := md5.New()
 	defer hash.Reset()
-	hash.Write([]byte(ud.Password))
-	ud.Password = hex.EncodeToString(hash.Sum(nil))
+	hash.Write([]byte(ud.password))
+	ud.password = hex.EncodeToString(hash.Sum(nil))
 }
