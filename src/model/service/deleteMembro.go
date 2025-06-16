@@ -1,4 +1,4 @@
-package model
+package service
 
 import resterr "crud/src/configuration/rest-err"
 

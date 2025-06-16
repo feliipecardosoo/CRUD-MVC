@@ -1,7 +1,6 @@
 package model
 
 import (
-	resterr "crud/src/configuration/rest-err"
 	"crypto/md5"
 	"encoding/hex"
 )
@@ -15,6 +14,15 @@ func NewMembroDomain(email, password, name string, age int8) MembroDomainInterfa
 	}
 }
 
+type MembroDomainInterface interface {
+	GetEmail() string
+	GetPassword() string
+	GetAge() string
+	GetName() string
+
+	EncryptPassword()
+}
+
 type membroDomain struct {
 	email    string
 	password string
@@ -22,11 +30,20 @@ type membroDomain struct {
 	age      int8
 }
 
-type MembroDomainInterface interface {
-	CreateMembroModel() *resterr.RestErr
-	UpdateMembro(string) *resterr.RestErr
-	FindMembro(string) *resterr.RestErr
-	DeleteMembro(string) *resterr.RestErr
+func (d *membroDomain) GetEmail() string {
+	return d.email
+}
+
+func (d *membroDomain) GetPassword() string {
+	return d.password
+}
+
+func (d *membroDomain) GetName() string {
+	return d.name
+}
+
+func (d *membroDomain) GetAge() int8 {
+	return d.age
 }
 
 func (ud *membroDomain) EncryptPassword() {
