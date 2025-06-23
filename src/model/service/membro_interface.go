@@ -5,6 +5,10 @@ import (
 	"crud/src/model"
 )
 
+func NewMembroDomainService() MembroDomainService {
+	return &membroDomainService{}
+}
+
 type membroDomainService struct {
 }
 

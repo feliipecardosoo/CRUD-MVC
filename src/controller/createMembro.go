@@ -5,6 +5,7 @@ import (
 	"crud/src/configuration/validation"
 	"crud/src/controller/model/request"
 	"crud/src/model"
+	"crud/src/model/service"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -34,7 +35,8 @@ func CreateMembroController(c *gin.Context) {
 		membroRequest.Age,
 	)
 
-	if err := domain.CreateMembroModel(); err != nil {
+	service := service.NewMembroDomainService()
+	if err := service.CreateMembroModel(domain); err != nil {
 		c.JSON(err.Code, membroRequest)
 		return
 	}
