@@ -17,7 +17,7 @@ func NewMembroDomain(email, password, name string, age int8) MembroDomainInterfa
 type MembroDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
-	GetAge() string
+	GetAge() int8
 	GetName() string
 
 	EncryptPassword()

@@ -5,6 +5,9 @@ import (
 	"crud/src/model"
 )
 
+type membroDomainService struct {
+}
+
 type MembroDomainService interface {
 	CreateMembroModel(model.MembroDomainInterface) *resterr.RestErr
 	UpdateMembro(string, model.MembroDomainInterface) *resterr.RestErr
