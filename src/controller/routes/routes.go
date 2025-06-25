@@ -6,10 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitRoutes(r *gin.RouterGroup) {
-	r.GET("/user/id/:userId", controller.FindMembroById)
-	r.GET("/user/email/:userEmail", controller.FindMembroByEmail)
-	r.POST("/user", controller.CreateMembroController)
-	r.PUT("/user", controller.AtualizaMembro)
-	r.DELETE("/user/:userId", controller.DeleteMembro)
+func InitRoutes(r *gin.RouterGroup, userController controller.MembroControllerInterface) {
+
+	r.GET("/user/id/:userId", userController.FindMembroById)
+	r.GET("/user/email/:userEmail", userController.FindMembroByEmail)
+	r.POST("/user", userController.CreateMembroController)
+	r.PUT("/user", userController.AtualizaMembro)
+	r.DELETE("/user/:userId", userController.DeleteMembro)
 }

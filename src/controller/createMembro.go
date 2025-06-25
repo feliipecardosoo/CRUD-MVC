@@ -5,13 +5,13 @@ import (
 	"crud/src/configuration/validation"
 	"crud/src/controller/model/request"
 	"crud/src/model"
-	"crud/src/model/service"
+	"crud/src/view"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-func CreateMembroController(c *gin.Context) {
+func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 	logger.Info("Init CreateMembro Controller",
 		zap.String("journey", "createMembro"),
 	)
@@ -35,8 +35,7 @@ func CreateMembroController(c *gin.Context) {
 		membroRequest.Age,
 	)
 
-	service := service.NewMembroDomainService()
-	if err := service.CreateMembroModel(domain); err != nil {
+	if err := uc.service.CreateMembroModel(domain); err != nil {
 		c.JSON(err.Code, membroRequest)
 		return
 	}
@@ -44,5 +43,7 @@ func CreateMembroController(c *gin.Context) {
 	logger.Info("Membro criado com sucesso",
 		zap.String("journey", "createMembro"))
 
-	c.JSON(201, "")
+	c.JSON(201, view.ConvertDomainToResponse(
+		domain,
+	))
 }

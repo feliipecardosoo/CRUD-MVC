@@ -2,6 +2,6 @@ package controller
 
 import "github.com/gin-gonic/gin"
 
-func AtualizaMembro(c *gin.Context) {
+func (uc *membroControllerInterface) AtualizaMembro(c *gin.Context) {
 
 }
