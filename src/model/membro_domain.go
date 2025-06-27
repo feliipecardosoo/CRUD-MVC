@@ -1,13 +1,15 @@
 package model
 
-import "crud/src/controller/model/request"
+import (
+	"crud/src/controller/model/request"
+	"time"
+)
 
 func NewMembroDomain(
 	name string, dataNascimento string, anoBatismo int16,
 	sexo string, estadoCivil string, dataCasamento string,
 	nomeConjuge string, filho bool, email string,
-	telefone string, status string, dataStatus string,
-	endereco enderecoRequest,
+	telefone string, endereco enderecoRequest,
 ) MembroDomainInterface {
 	return &membroDomain{
 		name:           name,
@@ -20,8 +22,8 @@ func NewMembroDomain(
 		filho:          filho,
 		email:          email,
 		telefone:       telefone,
-		status:         status,
-		dataStatus:     dataStatus,
+		status:         "ativo",
+		dataStatus:     time.Now().Format("2006-01-02"),
 		endereco:       endereco,
 		validado:       false,
 	}

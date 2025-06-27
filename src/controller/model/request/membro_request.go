@@ -11,7 +11,8 @@ type MembroRequest struct {
 	Filho          bool            `json:"filho" binding:"required"`
 	Email          string          `json:"email" binding:"required,email"`
 	Telefone       string          `json:"telefone" binding:"omitempty,min=10,max=15"`
-	Status         string          `json:"status" binding:"required,oneof=ativo inativo"`
-	DataStatus     string          `json:"data_status" binding:"required,datetime=2006-01-02"`
 	Endereco       EnderecoRequest `json:"endereco" binding:"required"`
 }
+
+// Status opções
+// ativo, inativo, desligado

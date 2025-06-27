@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 
+	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
@@ -48,4 +49,27 @@ func ValidadeMembroError(validation_err error) *resterr.RestErr {
 		return resterr.NewBadRequestValidationError("Alguns campos estão incorretos", errorCauses)
 	}
 	return resterr.NewBadRequestError("Error trying to convert fields")
+}
+
+func BindAndValidateStrict(c *gin.Context, obj interface{}) *resterr.RestErr {
+	decoder := json.NewDecoder(c.Request.Body)
+	decoder.DisallowUnknownFields() // rejeita campos extras
+
+	if err := decoder.Decode(obj); err != nil {
+		// Pode ser erro de campo extra ou json mal formatado
+		return resterr.NewBadRequestError("JSON inválido ou contém campos extras: " + err.Error())
+	}
+
+	// Verifica se sobrou algo no body depois do JSON
+	if decoder.More() {
+		return resterr.NewBadRequestError("JSON contém dados extras após o objeto")
+	}
+
+	// Validação do validator/v10
+	if err := Validate.Struct(obj); err != nil {
+		// Reaproveita sua função que converte erros do validator em restErr
+		return ValidadeMembroError(err)
+	}
+
+	return nil
 }

@@ -18,11 +18,11 @@ func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 
 	var membroRequest request.MembroRequest
 
-	if err := c.ShouldBindJSON(&membroRequest); err != nil {
+	if err := BindJSONStrict(c, &membroRequest); err != nil {
 		logger.Error("Erro ao tentar validar info de membro", err,
 			zap.String("journey", "createMembro"),
 		)
-		restErr := validation.ValidadeMembroError(err)
+		restErr := validation.BindAndValidateStrict(c, err)
 
 		c.JSON(restErr.Code, restErr)
 		return
@@ -39,8 +39,6 @@ func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 		membroRequest.Filho,
 		membroRequest.Email,
 		membroRequest.Telefone,
-		membroRequest.Status,
-		membroRequest.DataStatus,
 		model.ConvertEnderecoRequest(membroRequest.Endereco),
 	)
 
