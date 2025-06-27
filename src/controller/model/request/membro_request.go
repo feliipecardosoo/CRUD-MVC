@@ -14,5 +14,4 @@ type MembroRequest struct {
 	Status         string          `json:"status" binding:"required,oneof=ativo inativo"`
 	DataStatus     string          `json:"data_status" binding:"required,datetime=2006-01-02"`
 	Endereco       EnderecoRequest `json:"endereco" binding:"required"`
-	Validado       bool            `json:"validade" binding:"required"`
 }

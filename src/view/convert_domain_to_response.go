@@ -7,9 +7,9 @@ import (
 
 func ConvertDomainToResponse(membroDomain model.MembroDomainInterface) response.MembroResponse {
 	return response.MembroResponse{
-		Id:    "",
-		Email: membroDomain.GetEmail(),
-		Name:  membroDomain.GetName(),
-		Age:   membroDomain.GetAge(),
+		Name:       membroDomain.GetName(),
+		Status:     membroDomain.GetStatus(),
+		DataStatus: membroDomain.GetDataStatus(),
+		Validado:   membroDomain.GetValidado(),
 	}
 }

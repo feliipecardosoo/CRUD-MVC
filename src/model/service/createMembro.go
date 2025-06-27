@@ -10,6 +10,5 @@ import (
 
 func (ud *membroDomainService) CreateMembroModel(userDomain model.MembroDomainInterface) *resterr.RestErr {
 	logger.Info("Init createMembro model", zap.String("jorney", "createMembro"))
-	userDomain.EncryptPassword()
 	return nil
 }

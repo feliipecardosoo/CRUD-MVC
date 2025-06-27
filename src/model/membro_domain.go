@@ -1,54 +1,86 @@
 package model
 
-import (
-	"crypto/md5"
-	"encoding/hex"
-)
+import "crud/src/controller/model/request"
 
-func NewMembroDomain(email, password, name string, age int8) MembroDomainInterface {
+func NewMembroDomain(
+	name string, dataNascimento string, anoBatismo int16,
+	sexo string, estadoCivil string, dataCasamento string,
+	nomeConjuge string, filho bool, email string,
+	telefone string, status string, dataStatus string,
+	endereco enderecoRequest,
+) MembroDomainInterface {
 	return &membroDomain{
-		email,
-		password,
-		name,
-		age,
+		name:           name,
+		dataNascimento: dataNascimento,
+		anoBatismo:     anoBatismo,
+		sexo:           sexo,
+		estadoCivil:    estadoCivil,
+		dataCasamento:  dataCasamento,
+		nomeConjuge:    nomeConjuge,
+		filho:          filho,
+		email:          email,
+		telefone:       telefone,
+		status:         status,
+		dataStatus:     dataStatus,
+		endereco:       endereco,
+		validado:       false,
+	}
+}
+
+func ConvertEnderecoRequest(req request.EnderecoRequest) enderecoRequest {
+	return enderecoRequest{
+		cep:         req.Cep,
+		rua:         req.Rua,
+		numero:      req.Numero,
+		bairo:       req.Bairo,
+		complemento: req.Complemento,
 	}
 }
 
 type MembroDomainInterface interface {
-	GetEmail() string
-	GetPassword() string
-	GetAge() int8
 	GetName() string
-
-	EncryptPassword()
+	GetStatus() string
+	GetDataStatus() string
+	GetValidado() bool
 }
 
 type membroDomain struct {
-	email    string
-	password string
-	name     string
-	age      int8
+	name           string
+	dataNascimento string
+	anoBatismo     int16
+	sexo           string
+	estadoCivil    string
+	dataCasamento  string
+	nomeConjuge    string
+	filho          bool
+	email          string
+	telefone       string
+	status         string
+	dataStatus     string
+	endereco       enderecoRequest
+	validado       bool
 }
 
-func (d *membroDomain) GetEmail() string {
-	return d.email
-}
-
-func (d *membroDomain) GetPassword() string {
-	return d.password
+type enderecoRequest struct {
+	cep         string
+	rua         string
+	numero      string
+	bairo       string
+	complemento string
 }
 
 func (d *membroDomain) GetName() string {
 	return d.name
 }
 
-func (d *membroDomain) GetAge() int8 {
-	return d.age
+func (d *membroDomain) GetStatus() string {
+	return d.status
 }
 
-func (ud *membroDomain) EncryptPassword() {
-	hash := md5.New()
-	defer hash.Reset()
-	hash.Write([]byte(ud.password))
-	ud.password = hex.EncodeToString(hash.Sum(nil))
+func (d *membroDomain) GetDataStatus() string {
+	return d.dataStatus
+}
+
+func (d *membroDomain) GetValidado() bool {
+	return d.validado
 }

@@ -29,10 +29,19 @@ func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 	}
 
 	domain := model.NewMembroDomain(
-		membroRequest.Email,
-		membroRequest.Password,
 		membroRequest.Name,
-		membroRequest.Age,
+		membroRequest.DataNascimento,
+		membroRequest.AnoBatismo,
+		membroRequest.Sexo,
+		membroRequest.EstadoCivil,
+		membroRequest.DataCasamento,
+		membroRequest.NomeConjuge,
+		membroRequest.Filho,
+		membroRequest.Email,
+		membroRequest.Telefone,
+		membroRequest.Status,
+		membroRequest.DataStatus,
+		model.ConvertEnderecoRequest(membroRequest.Endereco),
 	)
 
 	if err := uc.service.CreateMembroModel(domain); err != nil {

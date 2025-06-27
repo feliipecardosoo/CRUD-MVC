@@ -1,8 +1,8 @@
 package response
 
 type MembroResponse struct {
-	Id    string `json:"id"`
-	Email string `json:"email"`
-	Name  string `json:"name"`
-	Age   int8   `json:"age"`
+	Name       string `json:"name"`
+	Status     string `json:"status"`
+	DataStatus string `json:"data_status"`
+	Validado   bool   `json:"validado"`
 }
