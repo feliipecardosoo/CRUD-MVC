@@ -5,10 +5,16 @@ import (
 	"crud/src/model"
 )
 
-func ConvertDomainToResponse(membroDomain model.MembroDomainInterface) response.MembroResponse {
+func ConvertMembroDomainToResponse(membroDomain model.MembroDomainInterface) response.MembroResponse {
 	return response.MembroResponse{
 		Name:       membroDomain.GetName(),
 		Status:     membroDomain.GetStatus(),
 		DataStatus: membroDomain.GetDataStatus(),
+	}
+}
+
+func ConvertAdminDomainToResponse(adminDomain model.AdminDomainInterface) response.AdminResponse {
+	return response.AdminResponse{
+		Usuario: adminDomain.GetUsuario(),
 	}
 }

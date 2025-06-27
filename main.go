@@ -2,9 +2,11 @@ package main
 
 import (
 	"crud/src/configuration/logger"
-	"crud/src/controller"
+	controllerAdmin "crud/src/controller/admin-controller"
+	controller "crud/src/controller/membro-controller"
 	"crud/src/controller/routes"
-	"crud/src/model/service"
+	serviceAdmin "crud/src/model/service/admin-service"
+	service "crud/src/model/service/membro-service"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -19,12 +21,15 @@ func main() {
 	}
 
 	// Inicializa Dependencias
-	service := service.NewMembroDomainService()
-	userController := controller.NewMembroControllerInterface(service)
+	serviceMembro := service.NewMembroDomainService()
+	serviceAdmin := serviceAdmin.NewAdminDomainService()
+	membroController := controller.NewMembroControllerInterface(serviceMembro)
+	adminController := controllerAdmin.NewAdminControllerInterface(serviceAdmin)
 
 	router := gin.Default()
 
-	routes.InitRoutes(&router.RouterGroup, userController)
+	routes.InitRoutesMembros(&router.RouterGroup, membroController)
+	routes.InitRoutesAdmins(&router.RouterGroup, adminController)
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)

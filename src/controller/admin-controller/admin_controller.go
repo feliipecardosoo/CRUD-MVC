@@ -2,29 +2,25 @@ package controller
 
 import (
 	resterr "crud/src/configuration/rest-err"
-	"crud/src/model/service"
+	service "crud/src/model/service/admin-service"
+
 	"encoding/json"
 
 	"github.com/gin-gonic/gin"
 )
 
-func NewMembroControllerInterface(serviceInterface service.MembroDomainService) MembroControllerInterface {
-	return &membroControllerInterface{
+func NewAdminControllerInterface(serviceInterface service.AdminDomainService) AdminControllerInterface {
+	return &adminControllerInterface{
 		service: serviceInterface,
 	}
 }
 
-type MembroControllerInterface interface {
-	AtualizaMembro(c *gin.Context)
-	CreateMembroController(c *gin.Context)
-	DeleteMembro(c *gin.Context)
-
-	FindMembroById(c *gin.Context)
-	FindMembroByEmail(c *gin.Context)
+type AdminControllerInterface interface {
+	CreateAdminController(c *gin.Context)
 }
 
-type membroControllerInterface struct {
-	service service.MembroDomainService
+type adminControllerInterface struct {
+	service service.AdminDomainService
 }
 
 // BindJSONStrict lê o JSON do request, rejeita campos extras e faz bind no obj.

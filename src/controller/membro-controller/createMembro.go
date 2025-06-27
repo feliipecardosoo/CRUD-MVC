@@ -52,7 +52,7 @@ func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 		zap.String("name", domain.GetName()),
 	)
 
-	c.JSON(201, view.ConvertDomainToResponse(
+	c.JSON(201, view.ConvertMembroDomainToResponse(
 		domain,
 	))
 }
