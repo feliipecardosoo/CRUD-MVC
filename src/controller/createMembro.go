@@ -50,7 +50,9 @@ func (uc *membroControllerInterface) CreateMembroController(c *gin.Context) {
 	}
 
 	logger.Info("Membro criado com sucesso",
-		zap.String("journey", "createMembro"))
+		zap.String("journey", "createMembro"),
+		zap.String("name", domain.GetName()),
+	)
 
 	c.JSON(201, view.ConvertDomainToResponse(
 		domain,

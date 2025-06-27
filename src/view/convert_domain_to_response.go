@@ -10,6 +10,5 @@ func ConvertDomainToResponse(membroDomain model.MembroDomainInterface) response.
 		Name:       membroDomain.GetName(),
 		Status:     membroDomain.GetStatus(),
 		DataStatus: membroDomain.GetDataStatus(),
-		Validado:   membroDomain.GetValidado(),
 	}
 }

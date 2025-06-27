@@ -41,7 +41,6 @@ type MembroDomainInterface interface {
 	GetName() string
 	GetStatus() string
 	GetDataStatus() string
-	GetValidado() bool
 }
 
 type membroDomain struct {
@@ -79,8 +78,4 @@ func (d *membroDomain) GetStatus() string {
 
 func (d *membroDomain) GetDataStatus() string {
 	return d.dataStatus
-}
-
-func (d *membroDomain) GetValidado() bool {
-	return d.validado
 }
