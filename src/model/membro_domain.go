@@ -32,7 +32,7 @@ func ConvertEnderecoRequest(req request.EnderecoRequest) enderecoRequest {
 		cep:         req.Cep,
 		rua:         req.Rua,
 		numero:      req.Numero,
-		bairo:       req.Bairo,
+		bairro:      req.Bairro,
 		complemento: req.Complemento,
 	}
 }
@@ -65,7 +65,7 @@ type enderecoRequest struct {
 	cep         string
 	rua         string
 	numero      string
-	bairo       string
+	bairro      string
 	complemento string
 }
 
